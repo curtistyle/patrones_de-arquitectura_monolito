@@ -1,5 +1,5 @@
 const path = require("path");
-const db = require("./database").getDb();
+const db = require("./Database").getDb();
 
 function createTables() {
   db.serialize(() => {

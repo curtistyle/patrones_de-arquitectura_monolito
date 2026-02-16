@@ -9,7 +9,12 @@ const PORT = process.env.PORT || 8000;
 // Ejecutar la inicialización de la base de datos
 createTables();
 
-app.engine("hbs", engine({ extname: ".hbs", defaultLayout: "mainLayout" }));
+app.engine("hbs", engine({ extname: ".hbs", defaultLayout: "mainLayout", partialsDir: [
+  path.join(__dirname, 'views', 'components', 'products'),
+  path.join(__dirname, 'views', 'layouts')
+] }));
+
+
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
 

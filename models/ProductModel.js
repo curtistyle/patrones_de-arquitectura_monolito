@@ -1,4 +1,4 @@
-const db = require("../db/database").getDb(); // Obtener la instancia de la base de datos
+const db = require("../db/Database").getDb(); // Obtener la instancia de la base de datos
 
 class ProductoModel {
   getAll() {
@@ -30,6 +30,20 @@ class ProductoModel {
     });
   }
 
+  // Metodo para obtener un producto por el ID
+  getById(id) {
+    return new Promise((resolve, reject) => {
+      db.get("SELECT * FROM products WHERE id = ?", [id], (err, product) => {
+        if (err) {
+          reject("Error no existe el producto: " + err.message);
+        } else {
+          resolve(product);
+        }
+      });
+    })
+  }
+  
+  
   // Método para eliminar un producto por ID
   deleteProduct(id) {
     return new Promise((resolve, reject) => {
@@ -42,6 +56,8 @@ class ProductoModel {
       });
     });
   }
+  
 }
+
 
 module.exports = ProductoModel;
